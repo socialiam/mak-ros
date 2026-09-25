@@ -69,6 +69,11 @@
 
       const tombol = document.createElement("button");
       tombol.textContent = "+ Keranjang";
+      if (p.habis) {
+        tombol.textContent = "Stok habis";
+        tombol.disabled = true;
+        kartu.classList.add("kosong");
+      }
       tombol.onclick = () => {
         tambah(p, pilih ? pilih.value : "");
         tombol.textContent = "✓ Ditambahkan";
@@ -98,7 +103,7 @@
   }
 
   function gambarKeranjang() {
-    keranjang = keranjang.filter((x) => produkDari(x) && x.jumlah > 0);
+    keranjang = keranjang.filter((x) => produkDari(x) && !produkDari(x).habis && x.jumlah > 0);
     const jumlah = keranjang.reduce((s, x) => s + x.jumlah, 0);
     $("bukaKeranjang").hidden = jumlah === 0;
     $("jumlahKeranjang").textContent = jumlah;

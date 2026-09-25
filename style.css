@@ -69,6 +69,8 @@ body {
 .kartu h3 { margin: 0; font-size: 16px; }
 .kartu p { margin: 0; color: var(--redup); font-size: 13px; flex: 1; }
 .harga { font-weight: 700; color: var(--utama); font-size: 17px; }
+.kartu.kosong { opacity: .6; }
+.kartu button:disabled { background: var(--garis); color: var(--redup); cursor: not-allowed; }
 .kartu select {
   padding: 8px; border-radius: 8px; border: 1px solid var(--garis);
   background: var(--latar); color: var(--teks); font-size: 14px;

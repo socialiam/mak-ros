@@ -15,9 +15,20 @@ Pembeli memilih barang, lalu pesanannya terkirim rapi ke WhatsApp toko.
 | `index.html` | Kerangka halaman | Tidak |
 | `style.css` | Warna dan tata letak | Tidak |
 | `app.js` | Mesin keranjang dan pesan WhatsApp | Tidak |
+| `admin.html` | Dasbor admin untuk mengubah isi toko lewat formulir | Tidak |
 | `foto/` | Tempat foto barang (opsional) | Tambahkan foto di sini |
 
-## Cara mengubah isi toko
+## Cara mengubah isi toko (paling mudah: dasbor)
+
+1. Buka `admin.html` (di internet: socialiam.github.io/mak-ros/admin.html).
+2. Ubah identitas toko, tambah/ubah/hapus barang, unggah foto, tandai stok habis.
+3. Klik **Unduh produk.js**, lalu klik dua kali `kirim-ke-github.cmd`.
+
+Dasbor aman dibiarkan terbuka untuk umum: ia hanya membuat berkas di
+komputer yang membukanya. Yang bisa mengirim ke GitHub hanya laptop yang
+sudah login sebagai pemilik.
+
+## Cara mengubah isi toko secara manual
 
 1. Buka `produk.js`.
 2. Isi `nomorWhatsApp`, diawali `62` tanpa angka 0 di depan.
