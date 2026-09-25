@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mak Ros</title>
+  <meta name="description" content="Frozen food rumahan dan busana pilihan. Pesan langsung lewat WhatsApp.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="kepala">
+    <div class="logo" aria-hidden="true">MR</div>
+    <div>
+      <h1 id="namaToko">Mak Ros</h1>
+      <p id="slogan"></p>
+    </div>
+  </header>
+
+  <nav class="tab" id="tab" aria-label="Kategori"></nav>
+
+  <main id="daftar" class="daftar"></main>
+
+  <button class="tombol-keranjang" id="bukaKeranjang" hidden>
+    🛒 <span id="jumlahKeranjang">0</span> barang · <strong id="totalMini">Rp0</strong>
+  </button>
+
+  <dialog id="keranjang" class="keranjang">
+    <h2>Keranjang</h2>
+    <ul id="isiKeranjang"></ul>
+    <p class="total">Total <strong id="total">Rp0</strong></p>
+    <label>Nama pemesan
+      <input id="namaPemesan" autocomplete="name" placeholder="Contoh: Bu Sari">
+    </label>
+    <label>Alamat kirim
+      <textarea id="alamat" rows="2" placeholder="Jalan, nomor rumah, patokan"></textarea>
+    </label>
+    <div class="aksi">
+      <button id="tutup" class="sekunder">Tutup</button>
+      <button id="kirimWa" class="utama">Pesan via WhatsApp</button>
+    </div>
+  </dialog>
+
+  <footer class="kaki">
+    <p>© <span id="tahun"></span> <span id="namaKaki">Mak Ros</span> · <span id="kota"></span></p>
+  </footer>
+
+  <script src="produk.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

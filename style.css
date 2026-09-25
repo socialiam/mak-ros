@@ -1,0 +1,116 @@
+:root {
+  --latar: #fbf6ef;
+  --kartu: #ffffff;
+  --teks: #3b2a20;
+  --redup: #7d6a5d;
+  --utama: #b5532f;
+  --utama-teks: #ffffff;
+  --garis: #eadfd2;
+  --wa: #1f9d55;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --latar: #1c1612;
+    --kartu: #2a211b;
+    --teks: #f3e9df;
+    --redup: #b8a595;
+    --utama: #e07a52;
+    --garis: #3d3128;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--latar);
+  color: var(--teks);
+  line-height: 1.5;
+  padding-bottom: 80px;
+}
+
+.kepala {
+  display: flex; gap: 14px; align-items: center;
+  max-width: 960px; margin: 0 auto; padding: 24px 16px 8px;
+}
+.logo {
+  width: 56px; height: 56px; flex: none; border-radius: 50%;
+  background: var(--utama); color: var(--utama-teks);
+  display: grid; place-items: center; font-weight: 700; font-size: 20px;
+}
+.kepala h1 { margin: 0; font-size: 26px; }
+.kepala p { margin: 2px 0 0; color: var(--redup); font-size: 14px; }
+
+.tab {
+  display: flex; gap: 8px; overflow-x: auto;
+  max-width: 960px; margin: 0 auto; padding: 12px 16px;
+  position: sticky; top: 0; background: var(--latar); z-index: 2;
+}
+.tab button {
+  border: 1px solid var(--garis); background: var(--kartu); color: var(--teks);
+  padding: 8px 16px; border-radius: 999px; font-size: 15px; cursor: pointer; white-space: nowrap;
+}
+.tab button[aria-pressed="true"] { background: var(--utama); color: var(--utama-teks); border-color: var(--utama); }
+
+.daftar {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  max-width: 960px; margin: 0 auto; padding: 8px 16px;
+}
+.kartu {
+  background: var(--kartu); border: 1px solid var(--garis); border-radius: 14px;
+  padding: 14px; display: flex; flex-direction: column; gap: 8px;
+}
+.gambar {
+  aspect-ratio: 4 / 3; border-radius: 10px; background: var(--latar);
+  display: grid; place-items: center; font-size: 56px; overflow: hidden;
+}
+.gambar img { width: 100%; height: 100%; object-fit: cover; }
+.kartu h3 { margin: 0; font-size: 16px; }
+.kartu p { margin: 0; color: var(--redup); font-size: 13px; flex: 1; }
+.harga { font-weight: 700; color: var(--utama); font-size: 17px; }
+.kartu select {
+  padding: 8px; border-radius: 8px; border: 1px solid var(--garis);
+  background: var(--latar); color: var(--teks); font-size: 14px;
+}
+
+button.utama, .kartu button {
+  background: var(--utama); color: var(--utama-teks); border: 0;
+  padding: 10px 14px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
+}
+button.sekunder {
+  background: transparent; color: var(--teks); border: 1px solid var(--garis);
+  padding: 10px 14px; border-radius: 10px; font-size: 15px; cursor: pointer;
+}
+
+.tombol-keranjang {
+  position: fixed; left: 16px; right: 16px; bottom: 16px; max-width: 480px; margin: 0 auto;
+  background: var(--wa); color: #fff; border: 0; border-radius: 14px;
+  padding: 14px; font-size: 16px; cursor: pointer; box-shadow: 0 6px 20px rgb(0 0 0 / .2);
+}
+
+.keranjang {
+  width: min(480px, calc(100% - 32px)); border: 0; border-radius: 16px;
+  background: var(--kartu); color: var(--teks); padding: 20px;
+}
+.keranjang::backdrop { background: rgb(0 0 0 / .5); }
+.keranjang h2 { margin: 0 0 8px; }
+.keranjang ul { list-style: none; padding: 0; margin: 0; }
+.keranjang li {
+  display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--garis);
+}
+.keranjang li span { flex: 1; font-size: 14px; }
+.keranjang li button {
+  width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--garis);
+  background: var(--latar); color: var(--teks); font-size: 16px; cursor: pointer;
+}
+.keranjang label { display: block; font-size: 14px; margin-top: 10px; }
+.keranjang input, .keranjang textarea {
+  width: 100%; margin-top: 4px; padding: 10px; border-radius: 8px; font: inherit;
+  border: 1px solid var(--garis); background: var(--latar); color: var(--teks);
+}
+.total { text-align: right; font-size: 17px; }
+.aksi { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+.aksi .utama { background: var(--wa); }
+
+.kaki { text-align: center; color: var(--redup); font-size: 13px; padding: 24px 16px; }
