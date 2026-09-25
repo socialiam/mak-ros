@@ -1,12 +1,11 @@
 // DATA TOKO MAK ROS
-// Paling mudah diubah lewat dasbor: admin.html
-// Harga ditulis angka tanpa titik. Nomor WhatsApp diawali 62.
+// Dibuat oleh dasbor (admin.html). Paling mudah diubah lewat dasbor.
 
 window.TOKO = {
   "nama": "Mak Ros",
   "slogan": "Masakan rumahan beku, camilan, dan busana pilihan. Dibuat dengan hati, seperti untuk keluarga sendiri.",
   "cerita": "Semua berawal dari dapur rumah. Resep yang dulu hanya dinikmati keluarga kini kami bagikan untuk Anda: dimasak sendiri, tanpa pengawet, dan dikemas rapi. Pakaiannya pun kami pilih satu per satu, seperti memilihkan untuk anak sendiri.",
-  "nomorWhatsApp": "62XXXXXXXXXXX",
+  "nomorWhatsApp": "",
   "kota": "Kota Anda",
   "jamBuka": "Setiap hari, 08.00 – 20.00",
   "areaKirim": "Dalam kota diantar. Luar kota lewat ekspedisi.",
