@@ -6,10 +6,10 @@
 
   let kategoriAktif = toko.kategori[0].id;
   let keranjang = [];
-  try { keranjang = JSON.parse(localStorage.getItem("maros-keranjang")) || []; } catch (e) {}
+  try { keranjang = JSON.parse(localStorage.getItem("makros-keranjang")) || []; } catch (e) {}
 
   function simpan() {
-    try { localStorage.setItem("maros-keranjang", JSON.stringify(keranjang)); } catch (e) {}
+    try { localStorage.setItem("makros-keranjang", JSON.stringify(keranjang)); } catch (e) {}
   }
 
   function isiIdentitas() {

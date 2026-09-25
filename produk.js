@@ -4,7 +4,7 @@
 // "pilihan" boleh dihapus bila barang tidak punya ukuran/varian.
 
 window.TOKO = {
-  nama: "Ma Ros",
+  nama: "Mak Ros",
   slogan: "Masakan rumahan beku & busana pilihan, dari dapur dan lemari keluarga.",
   // Nomor WhatsApp: awali 62, tanpa 0 di depan, tanpa spasi. Contoh 6281234567890
   nomorWhatsApp: "62XXXXXXXXXXX",

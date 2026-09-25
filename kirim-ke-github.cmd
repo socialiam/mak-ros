@@ -1,9 +1,9 @@
 @echo off
-title Kirim Toko Ma Ros ke GitHub
+title Kirim Toko Mak Ros ke GitHub
 cd /d "%~dp0"
 
 echo.
-echo   Mengirim perubahan toko Ma Ros ke GitHub...
+echo   Mengirim perubahan toko Mak Ros ke GitHub...
 echo.
 
 git add -A

@@ -1,4 +1,4 @@
-# Ma Ros
+# Mak Ros
 
 Toko online sederhana untuk usaha rumahan: **frozen food** dan **fashion**.
 Pembeli memilih barang, lalu pesanannya terkirim rapi ke WhatsApp toko.
