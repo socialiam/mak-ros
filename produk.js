@@ -1,10 +1,10 @@
-// DATA TOKO MAK ROS
+// DATA TOKO MA ROS
 // Hanya berkas ini yang perlu diubah untuk mengganti isi toko.
 // Harga ditulis angka biasa tanpa titik: 35000 berarti Rp35.000.
 // "pilihan" boleh dihapus bila barang tidak punya ukuran/varian.
 
 window.TOKO = {
-  nama: "Mak Ros",
+  nama: "Ma Ros",
   slogan: "Masakan rumahan beku & busana pilihan, dari dapur dan lemari keluarga.",
   // Nomor WhatsApp: awali 62, tanpa 0 di depan, tanpa spasi. Contoh 6281234567890
   nomorWhatsApp: "62XXXXXXXXXXX",
