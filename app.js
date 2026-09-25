@@ -4,7 +4,8 @@
   const rupiah = (n) => "Rp" + n.toLocaleString("id-ID");
   const $ = (id) => document.getElementById(id);
 
-  let kategoriAktif = toko.kategori[0].id;
+  const SEMUA = "semua";
+  let kategoriAktif = SEMUA;
   let keranjang = [];
   try { keranjang = JSON.parse(localStorage.getItem("makros-keranjang")) || []; } catch (e) {}
 
@@ -23,7 +24,7 @@
 
   function gambarTab() {
     $("tab").innerHTML = "";
-    toko.kategori.forEach((k) => {
+    [{ id: SEMUA, nama: "Semua", ikon: "🏠" }].concat(toko.kategori).forEach((k) => {
       const b = document.createElement("button");
       b.textContent = k.ikon + " " + k.nama;
       b.setAttribute("aria-pressed", k.id === kategoriAktif);
@@ -35,60 +36,74 @@
   function gambarDaftar() {
     const daftar = $("daftar");
     daftar.innerHTML = "";
-    const isi = toko.produk.filter((p) => p.kategori === kategoriAktif);
-    if (!isi.length) {
-      const kosong = document.createElement("p");
-      kosong.className = "kosong-kategori";
-      kosong.textContent = "Barang di kategori ini segera hadir.";
-      daftar.appendChild(kosong);
-    }
-    isi.forEach((p) => {
-      const kartu = document.createElement("article");
-      kartu.className = "kartu";
+    const tampil = kategoriAktif === SEMUA
+      ? toko.kategori
+      : toko.kategori.filter((k) => k.id === kategoriAktif);
 
-      const gambar = document.createElement("div");
-      gambar.className = "gambar";
-      if (p.foto) {
-        const img = document.createElement("img");
-        img.src = p.foto; img.alt = p.nama; img.loading = "lazy";
-        gambar.appendChild(img);
-      } else {
-        gambar.textContent = p.ikon || "🛍️";
+    tampil.forEach((k) => {
+      const isi = toko.produk.filter((p) => p.kategori === k.id);
+      if (kategoriAktif === SEMUA) {
+        const judul = document.createElement("h2");
+        judul.className = "judul-kategori";
+        judul.textContent = k.ikon + " " + k.nama;
+        daftar.appendChild(judul);
       }
-
-      const judul = document.createElement("h3");
-      judul.textContent = p.nama;
-      const ket = document.createElement("p");
-      ket.textContent = p.keterangan || "";
-      const harga = document.createElement("div");
-      harga.className = "harga";
-      harga.textContent = rupiah(p.harga);
-
-      kartu.append(gambar, judul, ket, harga);
-
-      let pilih = null;
-      if (p.pilihan && p.pilihan.length) {
-        pilih = document.createElement("select");
-        pilih.setAttribute("aria-label", "Pilihan " + p.nama);
-        p.pilihan.forEach((v) => pilih.add(new Option(v, v)));
-        kartu.appendChild(pilih);
+      if (!isi.length) {
+        const kosong = document.createElement("p");
+        kosong.className = "kosong-kategori";
+        kosong.textContent = "Barang di kategori ini segera hadir.";
+        daftar.appendChild(kosong);
       }
-
-      const tombol = document.createElement("button");
-      tombol.textContent = "+ Keranjang";
-      if (p.habis) {
-        tombol.textContent = "Stok habis";
-        tombol.disabled = true;
-        kartu.classList.add("kosong");
-      }
-      tombol.onclick = () => {
-        tambah(p, pilih ? pilih.value : "");
-        tombol.textContent = "✓ Ditambahkan";
-        setTimeout(() => (tombol.textContent = "+ Keranjang"), 900);
-      };
-      kartu.appendChild(tombol);
-      daftar.appendChild(kartu);
+      isi.forEach((p) => daftar.appendChild(buatKartu(p)));
     });
+  }
+
+  function buatKartu(p) {
+    const kartu = document.createElement("article");
+    kartu.className = "kartu";
+
+    const gambar = document.createElement("div");
+    gambar.className = "gambar";
+    if (p.foto) {
+      const img = document.createElement("img");
+      img.src = p.foto; img.alt = p.nama; img.loading = "lazy";
+      gambar.appendChild(img);
+    } else {
+      gambar.textContent = p.ikon || "🛍️";
+    }
+
+    const judul = document.createElement("h3");
+    judul.textContent = p.nama;
+    const ket = document.createElement("p");
+    ket.textContent = p.keterangan || "";
+    const harga = document.createElement("div");
+    harga.className = "harga";
+    harga.textContent = rupiah(p.harga);
+
+    kartu.append(gambar, judul, ket, harga);
+
+    let pilih = null;
+    if (p.pilihan && p.pilihan.length) {
+      pilih = document.createElement("select");
+      pilih.setAttribute("aria-label", "Pilihan " + p.nama);
+      p.pilihan.forEach((v) => pilih.add(new Option(v, v)));
+      kartu.appendChild(pilih);
+    }
+
+    const tombol = document.createElement("button");
+    tombol.textContent = "+ Keranjang";
+    if (p.habis) {
+      tombol.textContent = "Stok habis";
+      tombol.disabled = true;
+      kartu.classList.add("kosong");
+    }
+    tombol.onclick = () => {
+      tambah(p, pilih ? pilih.value : "");
+      tombol.textContent = "✓ Ditambahkan";
+      setTimeout(() => (tombol.textContent = "+ Keranjang"), 900);
+    };
+    kartu.appendChild(tombol);
+    return kartu;
   }
 
   function tambah(p, pilihan) {
