@@ -11,6 +11,9 @@ echo    socialiam.github.io/mak-ros
 echo   ==================================================
 echo.
 
+rem ---- ambil dulu perubahan yang diterbitkan dari HP ----
+git pull --rebase --autostash -q
+
 rem ---- ambil produk.js terbaru dari folder Unduhan ----
 set "BARU="
 for /f "delims=" %%f in ('dir /b /o-d "%UNDUHAN%\produk*.js" 2^>nul') do (

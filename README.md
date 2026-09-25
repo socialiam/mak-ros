@@ -1,45 +1,43 @@
 # Mak Ros
 
-Toko online sederhana untuk usaha rumahan: **frozen food** dan **fashion**.
-Pembeli memilih barang, lalu pesanannya terkirim rapi ke WhatsApp toko.
+Toko online untuk usaha rumahan: frozen food, camilan, kue kering, sambal, dan
+busana. Pembeli memilih barang, lalu pesanannya tersusun rapi di WhatsApp toko.
 
-- Tanpa server, tanpa biaya: tayang gratis lewat GitHub Pages.
-- Tanpa database: seluruh isi toko ada di satu berkas, `produk.js`.
-- Bisa dibuka di HP maupun laptop, dan mengikuti mode gelap.
+- **Toko:** https://socialiam.github.io/mak-ros/
+- **Dasbor:** https://socialiam.github.io/mak-ros/admin.html
+
+Tanpa server dan tanpa biaya. Seluruh isi toko ada di satu berkas, `produk.js`,
+dan berkas itu diubah lewat dasbor.
+
+## Mengubah isi toko
+
+Buka dasbor, ubah apa saja, lalu tekan **Terbitkan**. Ada dua cara terbit:
+
+1. **Dari HP (disarankan).** Sambungkan sekali di *Info toko → Terbitkan dari HP*.
+   Setelah itu setiap perubahan terbit dengan satu ketukan, foto ikut terunggah.
+2. **Lewat laptop.** Tekan *Unduh produk.js*, lalu klik dua kali
+   `kirim-ke-github.cmd`.
+
+Perubahan yang belum terbit tersimpan di perangkat itu dan bisa dilihat dulu
+dengan tombol **Pratinjau**.
+
+Pasang dasbor di layar utama HP: buka dasbor di Chrome, menu ⋮, lalu
+*Tambahkan ke layar utama*. Dasbor terbuka seperti aplikasi.
 
 ## Isi folder
 
-| Berkas | Gunanya | Perlu diubah? |
-| --- | --- | --- |
-| `produk.js` | Nama toko, nomor WhatsApp, kategori, daftar barang dan harga | **Ya, hanya ini** |
-| `index.html` | Kerangka halaman | Tidak |
-| `style.css` | Warna dan tata letak | Tidak |
-| `app.js` | Mesin keranjang dan pesan WhatsApp | Tidak |
-| `admin.html` | Dasbor admin untuk mengubah isi toko lewat formulir | Tidak |
-| `foto/` | Tempat foto barang (opsional) | Tambahkan foto di sini |
+| Berkas | Gunanya |
+| --- | --- |
+| `produk.js` | Isi toko: identitas, kategori, barang. Ditulis oleh dasbor. |
+| `index.html`, `app.js`, `style.css` | Halaman toko untuk pembeli |
+| `admin.html`, `admin.js`, `admin.css` | Dasbor pemilik toko |
+| `foto/` | Foto barang yang diunggah dari dasbor |
+| `gambar/` | Ikon toko dan gambar sampul untuk pratinjau link |
+| `kirim-ke-github.cmd` | Terbit lewat laptop |
 
-## Cara mengubah isi toko (paling mudah: dasbor)
+## Keamanan
 
-1. Buka `admin.html` (di internet: socialiam.github.io/mak-ros/admin.html).
-2. Ubah identitas toko, tambah/ubah/hapus barang, unggah foto, tandai stok habis.
-3. Klik **Unduh produk.js**, lalu klik dua kali `kirim-ke-github.cmd`.
-
-Dasbor aman dibiarkan terbuka untuk umum: ia hanya membuat berkas di
-komputer yang membukanya. Yang bisa mengirim ke GitHub hanya laptop yang
-sudah login sebagai pemilik.
-
-## Cara mengubah isi toko secara manual
-
-1. Buka `produk.js`.
-2. Isi `nomorWhatsApp`, diawali `62` tanpa angka 0 di depan.
-3. Ubah, tambah, atau hapus barang. Harga ditulis tanpa titik: `35000`.
-4. Untuk memakai foto, taruh fotonya di folder `foto/` lalu tambahkan
-   `foto: "foto/dimsum.jpg"` pada barang itu. Tanpa foto, ikon yang tampil.
-5. Klik dua kali `index.html` untuk melihat hasilnya di laptop.
-6. Klik dua kali `kirim-ke-github.cmd` agar perubahan tayang di internet.
-
-## Menambah kategori
-
-Tambahkan satu baris di `kategori`, misalnya
-`{ id: "kue", nama: "Kue Kering", ikon: "🍪" }`, lalu beri barang
-`kategori: "kue"`. Mesinnya tidak perlu disentuh.
+Dasbor boleh dibuka siapa saja: tanpa kunci GitHub, ia hanya bisa mengunduh
+berkas ke perangkatnya sendiri. Kunci GitHub disimpan di perangkat pemilik saja
+dan hanya berhak mengubah repo `mak-ros`. Bila HP hilang, hapus kuncinya di
+github.com/settings/personal-access-tokens.

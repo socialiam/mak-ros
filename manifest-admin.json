@@ -1,0 +1,13 @@
+{
+  "name": "Dasbor Mak Ros",
+  "short_name": "Dasbor",
+  "start_url": "./admin.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FBF6EE",
+  "theme_color": "#FBF6EE",
+  "icons": [
+    { "src": "gambar/ikon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "gambar/ikon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

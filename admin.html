@@ -2,313 +2,207 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex">
   <title>Dasbor Mak Ros</title>
+  <meta name="theme-color" content="#FBF6EE">
+  <link rel="icon" href="gambar/ikon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="gambar/ikon-512.png">
+  <link rel="manifest" href="manifest-admin.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .wadah { max-width: 960px; margin: 0 auto; padding: 16px; }
-    .panel { background: var(--kartu); border: 1px solid var(--garis); border-radius: 14px; padding: 16px; margin-bottom: 16px; }
-    .panel h2 { margin: 0 0 12px; font-size: 18px; }
-    .baris { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-    label { display: block; font-size: 14px; }
-    input, textarea, select {
-      width: 100%; margin-top: 4px; padding: 10px; border-radius: 8px; font: inherit;
-      border: 1px solid var(--garis); background: var(--latar); color: var(--teks);
-    }
-    .centang { display: flex; gap: 8px; align-items: center; }
-    .centang input { width: auto; margin: 0; }
-    .petunjuk { color: var(--redup); font-size: 13px; margin: 4px 0 0; }
-    .tabel { width: 100%; border-collapse: collapse; font-size: 14px; }
-    .tabel td { padding: 8px 4px; border-bottom: 1px solid var(--garis); vertical-align: middle; }
-    .mini { width: 44px; height: 44px; border-radius: 8px; background: var(--latar); display: grid; place-items: center; font-size: 24px; overflow: hidden; }
-    .mini img { width: 100%; height: 100%; object-fit: cover; }
-    .habis { color: #c0392b; font-size: 12px; font-weight: 600; }
-    .tombol-kecil { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--garis); background: var(--latar); color: var(--teks); cursor: pointer; font-size: 13px; }
-    .aksi-bawah { display: flex; gap: 8px; flex-wrap: wrap; }
-    .pita { background: #fff3cd; color: #6b4e00; padding: 10px 14px; border-radius: 10px; font-size: 14px; margin-bottom: 16px; }
-    .pratinjau-foto { margin-top: 8px; max-width: 160px; border-radius: 8px; display: block; }
-    .langkah { margin: 0; padding-left: 20px; font-size: 14px; }
-  </style>
+  <link rel="stylesheet" href="admin.css">
 </head>
-<body>
-  <header class="kepala">
-    <div class="logo" aria-hidden="true">MR</div>
+<body class="dasbor">
+  <header class="sapaan">
     <div>
-      <h1>Dasbor Toko</h1>
-      <p>Ubah isi toko di sini, lalu simpan.</p>
+      <p class="sapaan-kecil" id="sapaan">Selamat datang</p>
+      <h1><span id="namaToko">Mak Ros</span> <span aria-hidden="true">👋</span></h1>
     </div>
+    <a class="tombol-ikon tombol-lihat" id="lihatToko" href="index.html" target="_blank" rel="noopener" aria-label="Lihat toko">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mata"/></svg>
+    </a>
   </header>
 
-  <div class="wadah">
-    <div class="pita" id="pitaDraf" hidden>
-      Anda sedang melanjutkan perubahan yang belum dikirim.
-      <button class="tombol-kecil" id="buangDraf">Buang perubahan</button>
+  <section class="kartu-status" id="kartuStatus" aria-live="polite">
+    <div class="status-ikon" id="statusIkon">✓</div>
+    <div class="status-teks">
+      <strong id="statusJudul">Toko sudah terbaru</strong>
+      <span id="statusKet">Semua yang Anda lihat di sini sudah tampil di toko.</span>
     </div>
+    <div class="status-aksi" id="statusAksi" hidden>
+      <button class="tombol tombol-utama" id="tombolTerbit">Terbitkan</button>
+      <a class="tombol tombol-garis" href="index.html?pratinjau" target="_blank" rel="noopener">Pratinjau</a>
+    </div>
+  </section>
 
-    <section class="panel">
-      <h2>Identitas toko</h2>
-      <div class="baris">
-        <label>Nama toko <input id="nama"></label>
-        <label>Kota <input id="kota"></label>
-        <label>Nomor WhatsApp <input id="wa" inputmode="numeric" placeholder="6281234567890">
-          <span class="petunjuk">Awali 62, tanpa 0 di depan, tanpa spasi.</span>
+  <main class="halaman">
+    <!-- ========== BARANG ========== -->
+    <section id="halBarang" class="hal">
+      <div class="bilah-saring bilah-saring-admin">
+        <label class="cari">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cari"/></svg>
+          <input id="cariBarang" type="search" placeholder="Cari barang…" aria-label="Cari barang">
         </label>
+        <nav class="keping" id="saringKategori" aria-label="Saring kategori"></nav>
       </div>
-      <label style="margin-top:10px">Slogan <input id="slogan"></label>
+      <ul class="daftar-admin" id="daftarBarang"></ul>
     </section>
 
-    <section class="panel">
-      <h2 id="judulForm">Tambah barang</h2>
-      <div class="baris">
-        <label>Kategori <select id="fKategori"></select></label>
-        <label>Nama barang <input id="fNama" placeholder="Contoh: Dimsum Ayam isi 20"></label>
-        <label>Harga (Rp) <input id="fHarga" inputmode="numeric" placeholder="35000"></label>
-        <label>Ikon (bila tanpa foto) <input id="fIkon" placeholder="🥟" maxlength="4"></label>
-      </div>
-      <label style="margin-top:10px">Keterangan <textarea id="fKet" rows="2"></textarea></label>
-      <label style="margin-top:10px">Pilihan / ukuran / varian
-        <input id="fPilihan" placeholder="Contoh: M, L, XL">
-        <span class="petunjuk">Pisahkan dengan koma. Kosongkan bila tidak ada.</span>
-      </label>
-      <label style="margin-top:10px">Foto
-        <input id="fFoto" type="file" accept="image/*">
-        <span class="petunjuk">Foto dikecilkan otomatis supaya toko tetap ringan dibuka.</span>
-      </label>
-      <img id="fPratinjau" class="pratinjau-foto" alt="" hidden>
-      <button class="tombol-kecil" id="hapusFoto" hidden>Hapus foto</button>
-      <label class="centang" style="margin-top:10px"><input id="fHabis" type="checkbox"> Stok sedang habis</label>
-      <div class="aksi-bawah" style="margin-top:14px">
-        <button class="utama" id="simpanBarang">Simpan barang</button>
-        <button class="sekunder" id="batalEdit" hidden>Batal</button>
-      </div>
+    <!-- ========== KATEGORI ========== -->
+    <section id="halKategori" class="hal" hidden>
+      <h2 class="judul-hal">Kategori</h2>
+      <p class="ket-hal">Urutan di sini sama dengan urutan di toko. Ketuk ikon untuk menggantinya.</p>
+      <ul class="daftar-admin" id="daftarKategori"></ul>
+      <button class="tombol tombol-garis tombol-lebar" id="tambahKategori" style="margin-top:14px">+ Kategori baru</button>
     </section>
 
-    <section class="panel">
-      <h2>Daftar barang</h2>
-      <table class="tabel"><tbody id="daftarBarang"></tbody></table>
-    </section>
-
-    <section class="panel">
-      <h2>Kategori</h2>
-      <table class="tabel"><tbody id="daftarKategori"></tbody></table>
-      <div class="baris" style="margin-top:10px">
-        <label>Nama kategori baru <input id="kNama" placeholder="Contoh: Kue Kering"></label>
-        <label>Ikon <input id="kIkon" placeholder="🍪" maxlength="4"></label>
+    <!-- ========== INFO TOKO ========== -->
+    <section id="halToko" class="hal" hidden>
+      <h2 class="judul-hal">Info toko</h2>
+      <p class="ket-hal">Tulisan ini tampil di halaman toko.</p>
+      <div class="kotak formulir">
+        <label>Nama toko<input data-toko="nama" maxlength="30"></label>
+        <label>Nomor WhatsApp
+          <div class="dengan-awalan"><span>+</span><input data-toko="nomorWhatsApp" inputmode="numeric" placeholder="6281234567890"></div>
+          <small class="bantu" id="bantuWa">Awali 62, lalu nomor tanpa 0 di depan. Contoh: 0812… ditulis 62812…</small>
+        </label>
+        <button class="tombol tombol-garis" id="cobaWa" type="button">💬 Coba buka WhatsApp toko</button>
+        <label>Kota<input data-toko="kota" placeholder="Contoh: Pekanbaru"></label>
+        <label>Slogan<textarea data-toko="slogan" rows="2"></textarea></label>
+        <label>Cerita toko<textarea data-toko="cerita" rows="4"></textarea>
+          <small class="bantu">Ceritakan dengan bahasa sendiri. Pembeli suka kisah yang tulus.</small>
+        </label>
+        <label>Jam buka<input data-toko="jamBuka" placeholder="Setiap hari, 08.00 – 20.00"></label>
+        <label>Pengiriman<input data-toko="areaKirim" placeholder="Dalam kota diantar…"></label>
+        <p class="label-kecil">Cara bayar</p>
+        <div class="keping-sunting" id="daftarBayar"></div>
+        <div class="tambah-sebaris">
+          <input id="bayarBaru" placeholder="Contoh: DANA, OVO">
+          <button class="tombol tombol-garis" id="tambahBayar" type="button">Tambah</button>
+        </div>
       </div>
-      <button class="tombol-kecil" id="tambahKategori" style="margin-top:10px">+ Tambah kategori</button>
-    </section>
 
-    <section class="panel">
-      <h2>Kirim ke toko online</h2>
-      <ol class="langkah">
-        <li>Klik <strong>Unduh produk.js</strong>. Berkasnya masuk ke folder Unduhan.</li>
-        <li>Klik dua kali <strong>kirim-ke-github.cmd</strong> di folder mak-ros.</li>
-        <li>Tunggu satu menit, lalu muat ulang toko dengan Ctrl+Shift+R.</li>
-      </ol>
-      <div class="aksi-bawah" style="margin-top:14px">
-        <button class="utama" id="unduh">Unduh produk.js</button>
-        <a class="tombol-kecil" href="index.html" target="_blank" style="text-decoration:none;align-self:center">Lihat toko ↗</a>
+      <h2 class="judul-hal" style="margin-top:28px">Terbitkan dari HP</h2>
+      <div class="kotak" id="kotakSambung"></div>
+
+      <h2 class="judul-hal" style="margin-top:28px">Cadangan</h2>
+      <div class="kotak">
+        <p class="ket-hal" style="margin-top:0">Simpan salinan seluruh isi toko ke HP atau laptop. Cara ini juga dipakai untuk terbit lewat laptop.</p>
+        <button class="tombol tombol-garis tombol-lebar" id="unduh">⬇️ Unduh produk.js</button>
       </div>
     </section>
-  </div>
+  </main>
+
+  <button class="tombol-apung" id="barangBaru" aria-label="Tambah barang baru">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg> Barang baru
+  </button>
+
+  <nav class="nav-bawah" aria-label="Menu">
+    <button data-hal="halBarang" aria-current="page"><span aria-hidden="true">🛍️</span>Barang</button>
+    <button data-hal="halKategori"><span aria-hidden="true">🗂️</span>Kategori</button>
+    <button data-hal="halToko"><span aria-hidden="true">🏠</span>Info toko</button>
+  </nav>
+
+  <!-- ========== LEMBAR SUNTING BARANG ========== -->
+  <dialog class="lembar lembar-penuh" id="lembarSunting" aria-labelledby="judulSunting">
+    <div class="lembar-isi">
+      <button class="tutup-lembar" data-tutup aria-label="Tutup">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+      <h2 class="judul-lembar" id="judulSunting">Barang baru</h2>
+      <div class="formulir">
+        <div class="foto-wadah" id="fotoWadah">
+          <button class="foto-kosong" id="fotoPilih" type="button">
+            <span class="foto-ikon" id="fotoIkon">📷</span>
+            <strong>Ketuk untuk pasang foto</strong>
+            <small>Foto dari galeri atau kamera</small>
+          </button>
+          <img id="fotoGambar" alt="" hidden>
+          <div class="foto-aksi" id="fotoAksi" hidden>
+            <button type="button" class="tombol tombol-garis" id="fotoGanti">Ganti foto</button>
+            <button type="button" class="tombol tombol-garis" id="fotoHapus">Hapus</button>
+          </div>
+          <input id="fotoBerkas" type="file" accept="image/*" hidden>
+        </div>
+
+        <label>Nama barang<input id="sNama" placeholder="Contoh: Dimsum Ayam isi 20" maxlength="60"></label>
+        <label>Harga
+          <div class="dengan-awalan"><span>Rp</span><input id="sHarga" inputmode="numeric" placeholder="35.000"></div>
+        </label>
+
+        <p class="label-kecil">Kategori</p>
+        <div class="pilihan" id="sKategori" role="radiogroup" aria-label="Kategori"></div>
+
+        <p class="label-kecil">Varian / ukuran <span class="opsional">(boleh kosong)</span></p>
+        <div class="keping-sunting" id="sVarian"></div>
+        <div class="tambah-sebaris">
+          <input id="varianBaru" placeholder="Contoh: Pedas, atau XL">
+          <button class="tombol tombol-garis" id="tambahVarian" type="button">Tambah</button>
+        </div>
+        <div class="saran" id="saranVarian"></div>
+
+        <label>Keterangan<textarea id="sKet" rows="3" placeholder="Rasa, bahan, ukuran, cara masak…"></textarea></label>
+
+        <div id="wadahIkon">
+          <p class="label-kecil">Ikon <span class="opsional">(tampil bila belum ada foto)</span></p>
+          <div class="kisi-ikon" id="sIkon"></div>
+        </div>
+
+        <div class="saklar-baris">
+          <div><strong>Stok tersedia</strong><small>Matikan saat barang habis</small></div>
+          <label class="saklar"><input type="checkbox" id="sTersedia" checked><span></span><b class="sr">Stok tersedia</b></label>
+        </div>
+        <div class="saklar-baris">
+          <div><strong>⭐ Jadikan favorit</strong><small>Tampil paling atas di toko</small></div>
+          <label class="saklar"><input type="checkbox" id="sUnggulan"><span></span><b class="sr">Jadikan favorit</b></label>
+        </div>
+
+        <button class="hapus-barang" id="hapusBarang" type="button" hidden>🗑 Hapus barang ini</button>
+      </div>
+      <div class="lembar-kaki">
+        <button class="tombol tombol-utama tombol-lebar" id="simpanBarang">Simpan</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========== LEMBAR PILIH IKON KATEGORI ========== -->
+  <dialog class="lembar" id="lembarIkon" aria-labelledby="judulIkon">
+    <div class="lembar-isi">
+      <button class="tutup-lembar" data-tutup aria-label="Tutup">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+      <h2 class="judul-lembar" id="judulIkon">Pilih ikon</h2>
+      <div class="formulir"><div class="kisi-ikon" id="kisiIkonKategori"></div></div>
+    </div>
+  </dialog>
+
+  <!-- ========== LEMBAR TERBITKAN ========== -->
+  <dialog class="lembar" id="lembarTerbit" aria-labelledby="judulTerbit">
+    <div class="lembar-isi">
+      <button class="tutup-lembar" data-tutup aria-label="Tutup">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+      <h2 class="judul-lembar" id="judulTerbit">Terbitkan perubahan</h2>
+      <div class="formulir" id="isiTerbit"></div>
+      <div class="lembar-kaki lembar-kaki-kolom" id="kakiTerbit"></div>
+    </div>
+  </dialog>
+
+  <div class="roti" id="roti" role="status" aria-live="polite"></div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-cari" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14Zm9 2-4-4"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-mata" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-atas" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6 14 6-6 6 6"/></symbol>
+    <symbol id="i-bawah" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6 10 6 6 6-6"/></symbol>
+  </svg>
 
   <script src="produk.js"></script>
-  <script>
-  (function () {
-    const KUNCI_DRAF = "makros-draf-admin";
-    const $ = (id) => document.getElementById(id);
-    const rupiah = (n) => "Rp" + Number(n).toLocaleString("id-ID");
-    const salin = (x) => JSON.parse(JSON.stringify(x));
-
-    let data = salin(window.TOKO);
-    try {
-      const draf = localStorage.getItem(KUNCI_DRAF);
-      // Draf yang sudah sama dengan produk.js berarti sudah terkirim.
-      if (draf && draf === JSON.stringify(window.TOKO)) localStorage.removeItem(KUNCI_DRAF);
-      else if (draf) { data = JSON.parse(draf); $("pitaDraf").hidden = false; }
-    } catch (e) {}
-
-    let idSunting = null;
-    let fotoSementara = "";
-
-    function simpanDraf() {
-      try { localStorage.setItem(KUNCI_DRAF, JSON.stringify(data)); $("pitaDraf").hidden = false; }
-      catch (e) { alert("Penyimpanan browser penuh. Kurangi jumlah foto atau unduh sekarang."); }
-    }
-
-    // ---- identitas ----
-    const identitas = { nama: "nama", kota: "kota", wa: "nomorWhatsApp", slogan: "slogan" };
-    Object.keys(identitas).forEach((id) => {
-      $(id).value = data[identitas[id]] || "";
-      $(id).oninput = () => { data[identitas[id]] = $(id).value.trim(); simpanDraf(); };
-    });
-
-    // ---- kategori ----
-    function gambarKategori() {
-      $("fKategori").innerHTML = "";
-      data.kategori.forEach((k) => $("fKategori").add(new Option(k.ikon + " " + k.nama, k.id)));
-      const tb = $("daftarKategori");
-      tb.innerHTML = "";
-      data.kategori.forEach((k) => {
-        const tr = document.createElement("tr");
-        const jumlah = data.produk.filter((p) => p.kategori === k.id).length;
-        tr.innerHTML = "<td></td><td></td><td style='text-align:right'></td>";
-        tr.children[0].textContent = k.ikon + " " + k.nama;
-        tr.children[1].textContent = jumlah + " barang";
-        const hapus = document.createElement("button");
-        hapus.className = "tombol-kecil"; hapus.textContent = "Hapus";
-        hapus.onclick = () => {
-          if (jumlah) return alert("Kategori ini masih berisi barang. Pindahkan atau hapus barangnya dulu.");
-          if (data.kategori.length === 1) return alert("Toko perlu setidaknya satu kategori.");
-          data.kategori = data.kategori.filter((x) => x.id !== k.id);
-          simpanDraf(); gambarKategori();
-        };
-        tr.children[2].appendChild(hapus);
-        tb.appendChild(tr);
-      });
-    }
-
-    $("tambahKategori").onclick = () => {
-      const nama = $("kNama").value.trim();
-      if (!nama) return alert("Isi nama kategori.");
-      const id = nama.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "kategori";
-      if (data.kategori.some((k) => k.id === id)) return alert("Kategori itu sudah ada.");
-      data.kategori.push({ id, nama, ikon: $("kIkon").value.trim() || "🛍️" });
-      $("kNama").value = ""; $("kIkon").value = "";
-      simpanDraf(); gambarKategori();
-    };
-
-    // ---- foto: dikecilkan ke sisi terpanjang 600 px ----
-    $("fFoto").onchange = () => {
-      const berkas = $("fFoto").files[0];
-      if (!berkas) return;
-      const img = new Image();
-      img.onload = () => {
-        const skala = Math.min(1, 600 / Math.max(img.width, img.height));
-        const c = document.createElement("canvas");
-        c.width = Math.round(img.width * skala); c.height = Math.round(img.height * skala);
-        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
-        fotoSementara = c.toDataURL("image/jpeg", 0.75);
-        tampilkanFoto();
-        URL.revokeObjectURL(img.src);
-      };
-      img.src = URL.createObjectURL(berkas);
-    };
-    $("hapusFoto").onclick = () => { fotoSementara = ""; $("fFoto").value = ""; tampilkanFoto(); };
-    function tampilkanFoto() {
-      $("fPratinjau").hidden = !fotoSementara;
-      $("hapusFoto").hidden = !fotoSementara;
-      if (fotoSementara) $("fPratinjau").src = fotoSementara;
-    }
-
-    // ---- barang ----
-    function kosongkanForm() {
-      idSunting = null; fotoSementara = "";
-      ["fNama", "fHarga", "fIkon", "fKet", "fPilihan", "fFoto"].forEach((id) => ($(id).value = ""));
-      $("fHabis").checked = false;
-      $("judulForm").textContent = "Tambah barang";
-      $("batalEdit").hidden = true;
-      tampilkanFoto();
-    }
-
-    function sunting(p) {
-      idSunting = p.id;
-      $("fKategori").value = p.kategori;
-      $("fNama").value = p.nama;
-      $("fHarga").value = p.harga;
-      $("fIkon").value = p.ikon || "";
-      $("fKet").value = p.keterangan || "";
-      $("fPilihan").value = (p.pilihan || []).join(", ");
-      $("fHabis").checked = !!p.habis;
-      fotoSementara = p.foto || "";
-      $("judulForm").textContent = "Ubah barang";
-      $("batalEdit").hidden = false;
-      tampilkanFoto();
-      $("judulForm").scrollIntoView({ behavior: "smooth" });
-    }
-
-    $("batalEdit").onclick = kosongkanForm;
-
-    $("simpanBarang").onclick = () => {
-      const nama = $("fNama").value.trim();
-      const harga = Number($("fHarga").value.replace(/\D/g, ""));
-      if (!nama) return alert("Isi nama barang.");
-      if (!harga) return alert("Isi harga dengan angka, contoh 35000.");
-      const barang = {
-        id: idSunting || "P" + Date.now().toString(36).toUpperCase(),
-        kategori: $("fKategori").value,
-        nama,
-        harga,
-        ikon: $("fIkon").value.trim() || "🛍️",
-        keterangan: $("fKet").value.trim()
-      };
-      const pilihan = $("fPilihan").value.split(",").map((s) => s.trim()).filter(Boolean);
-      if (pilihan.length) barang.pilihan = pilihan;
-      if (fotoSementara) barang.foto = fotoSementara;
-      if ($("fHabis").checked) barang.habis = true;
-
-      const i = data.produk.findIndex((p) => p.id === barang.id);
-      if (i >= 0) data.produk[i] = barang; else data.produk.push(barang);
-      simpanDraf(); kosongkanForm(); gambarBarang(); gambarKategori();
-    };
-
-    function gambarBarang() {
-      const tb = $("daftarBarang");
-      tb.innerHTML = "";
-      data.kategori.forEach((k) => {
-        data.produk.filter((p) => p.kategori === k.id).forEach((p) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = "<td><div class='mini'></div></td><td></td><td></td><td style='text-align:right;white-space:nowrap'></td>";
-          const mini = tr.querySelector(".mini");
-          if (p.foto) { const img = document.createElement("img"); img.src = p.foto; img.alt = ""; mini.appendChild(img); }
-          else mini.textContent = p.ikon || "🛍️";
-          tr.children[1].textContent = p.nama;
-          if (p.habis) { const h = document.createElement("div"); h.className = "habis"; h.textContent = "Stok habis"; tr.children[1].appendChild(h); }
-          tr.children[2].textContent = rupiah(p.harga);
-          const ubah = document.createElement("button");
-          ubah.className = "tombol-kecil"; ubah.textContent = "Ubah";
-          ubah.onclick = () => sunting(p);
-          const hapus = document.createElement("button");
-          hapus.className = "tombol-kecil"; hapus.textContent = "Hapus"; hapus.style.marginLeft = "6px";
-          hapus.onclick = () => {
-            if (!confirm("Hapus " + p.nama + "?")) return;
-            data.produk = data.produk.filter((x) => x.id !== p.id);
-            if (idSunting === p.id) kosongkanForm();
-            simpanDraf(); gambarBarang(); gambarKategori();
-          };
-          tr.children[3].append(ubah, hapus);
-          tb.appendChild(tr);
-        });
-      });
-      if (!data.produk.length) tb.innerHTML = "<tr><td>Belum ada barang.</td></tr>";
-    }
-
-    // ---- unduh ----
-    $("unduh").onclick = () => {
-      if (!/^62\d{8,13}$/.test(data.nomorWhatsApp || "")) {
-        if (!confirm("Nomor WhatsApp belum benar, jadi pembeli belum bisa memesan. Tetap unduh?")) return;
-      }
-      const isi = "// DATA TOKO MAK ROS\n" +
-        "// Dibuat dari dasbor (admin.html). Ubah lewat dasbor, bukan di sini.\n\n" +
-        "window.TOKO = " + JSON.stringify(data, null, 2) + ";\n";
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(new Blob([isi], { type: "text/javascript" }));
-      a.download = "produk.js";
-      a.click();
-      URL.revokeObjectURL(a.href);
-      alert("produk.js sudah diunduh. Sekarang klik dua kali kirim-ke-github.cmd di folder mak-ros.");
-    };
-
-    $("buangDraf").onclick = () => {
-      if (!confirm("Buang semua perubahan yang belum dikirim?")) return;
-      try { localStorage.removeItem(KUNCI_DRAF); } catch (e) {}
-      location.reload();
-    };
-
-    gambarKategori();
-    gambarBarang();
-  })();
-  </script>
+  <script src="admin.js"></script>
 </body>
 </html>

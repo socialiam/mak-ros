@@ -1,0 +1,12 @@
+{
+  "name": "Mak Ros · Dapur & Butik Rumahan",
+  "short_name": "Mak Ros",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FBF6EE",
+  "theme_color": "#FBF6EE",
+  "icons": [
+    { "src": "gambar/ikon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "gambar/ikon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
