@@ -12,6 +12,9 @@ window.TOKO = {
 
   kategori: [
     { id: "frozen", nama: "Frozen Food", ikon: "🥟" },
+    { id: "camilan", nama: "Camilan", ikon: "🥨" },
+    { id: "kue", nama: "Kue Kering", ikon: "🍪" },
+    { id: "sambal", nama: "Sambal & Bumbu", ikon: "🌶️" },
     { id: "fashion", nama: "Fashion", ikon: "👗" }
   ],
 
@@ -25,6 +28,25 @@ window.TOKO = {
       keterangan: "Isi smoked beef, telur dan mayones. Tinggal goreng." },
     { id: "F04", kategori: "frozen", nama: "Rendang Sapi 250 g", harga: 65000, ikon: "🍛",
       keterangan: "Resep keluarga, dimasak 6 jam. Hangatkan saja." },
+
+    { id: "C01", kategori: "camilan", nama: "Keripik Singkong Balado 250 g", harga: 20000, ikon: "🥔",
+      keterangan: "Renyah, bumbu balado meresap.",
+      pilihan: ["Original", "Balado", "Pedas Level 3"] },
+    { id: "C02", kategori: "camilan", nama: "Rempeyek Kacang isi 10", harga: 18000, ikon: "🥜",
+      keterangan: "Tipis, gurih, kacang tanah pilihan." },
+    { id: "C03", kategori: "camilan", nama: "Makaroni Pedas Daun Jeruk 200 g", harga: 15000, ikon: "🌀",
+      keterangan: "Pedas nagih, wangi daun jeruk." },
+
+    { id: "K01", kategori: "kue", nama: "Nastar Premium 500 g", harga: 85000, ikon: "🍪",
+      keterangan: "Selai nanas buatan sendiri, mentega wisman." },
+    { id: "K02", kategori: "kue", nama: "Kastengel Keju 500 g", harga: 90000, ikon: "🧀",
+      keterangan: "Keju edam asli, gurih dan lumer." },
+
+    { id: "S01", kategori: "sambal", nama: "Sambal Bawang 150 ml", harga: 25000, ikon: "🌶️",
+      keterangan: "Tahan 2 minggu di suhu ruang.",
+      pilihan: ["Sedang", "Pedas", "Extra Pedas"] },
+    { id: "S02", kategori: "sambal", nama: "Bumbu Rendang Siap Masak", harga: 30000, ikon: "🫙",
+      keterangan: "Untuk 1 kg daging. Tinggal tambah santan." },
 
     { id: "B01", kategori: "fashion", nama: "Gamis Katun Polos", harga: 145000, ikon: "👗",
       keterangan: "Katun adem, jahitan rapi, ada saku.",

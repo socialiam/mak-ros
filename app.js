@@ -35,7 +35,14 @@
   function gambarDaftar() {
     const daftar = $("daftar");
     daftar.innerHTML = "";
-    toko.produk.filter((p) => p.kategori === kategoriAktif).forEach((p) => {
+    const isi = toko.produk.filter((p) => p.kategori === kategoriAktif);
+    if (!isi.length) {
+      const kosong = document.createElement("p");
+      kosong.className = "kosong-kategori";
+      kosong.textContent = "Barang di kategori ini segera hadir.";
+      daftar.appendChild(kosong);
+    }
+    isi.forEach((p) => {
       const kartu = document.createElement("article");
       kartu.className = "kartu";
 
